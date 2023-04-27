@@ -5,6 +5,5 @@ const createActivity = async(data) => {
     return response.dataValues;
 }
 
-module.exports = {
-    createActivity
-}
+module.exports = 
+    createActivity;

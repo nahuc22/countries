@@ -1,4 +1,4 @@
-const { createActivity  } = require("../controllers/activityController");
+const  createActivity  = require("../controllers/activityController");
 
 const getActivitiesCountriesHandler = (req, res) => {
 

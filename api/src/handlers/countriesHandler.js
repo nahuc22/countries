@@ -1,17 +1,21 @@
-const { getCountryById } = require ("../controllers/countryController");
-const getCountryByNameHandler = (req, res) => {
+const  getCountryById = require ("../controllers/countryController");
+const getAllCountries = require("../controllers/dbGetApi");
+
+const getCountryByNameHandler = async(req, res) => {
     const {name} = req.query;
-    if(name) res.send(`Este es el nombre:${name}`);
-    else res.send("Estos son todos los paises")    
+    const getAll = await getAllCountries()
+    const getAllFilter = getAll.filter(country => country.nombre === name)
+    res.status(200).json({data: getAllFilter})
 }
-const getAllCountriesHandler = (req, res) => {
-    res.status(200).send("Estoy acá, fack");
+const getAllCountriesHandler = async (req, res) => {
+    const getCountries = await getAllCountries()
+    res.status(200).json({data: getCountries});
 }
 const getCountryByIdHandler = async (req, res) => {
     const {id} = req.params;
     try {
         const country = await getCountryById(id)
-        res.status(200).send(`Acá esta el id:${id}`);
+        res.status(200).json({country});
     }catch(error){
         res.status(400).json({error: error.message})
     }

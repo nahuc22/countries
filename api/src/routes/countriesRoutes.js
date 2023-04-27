@@ -9,7 +9,7 @@ const countriesRouter = Router();
 
 countriesRouter.get("/", getCountryByNameHandler)
 
-countriesRouter.get("/", getAllCountriesHandler)
+countriesRouter.get("/all", getAllCountriesHandler)
 
 countriesRouter.get("/:id", getCountryByIdHandler)
 
