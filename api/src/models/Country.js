@@ -11,12 +11,16 @@ module.exports = (sequelize) => {
           primaryKey: true,
           defaultValue: DataTypes.UUIDV4
       },
+      name: {
+        type: DataTypes.STRING,
+        allowNull: false,
+      },
       imagen: {
         type: DataTypes.STRING,
         allowNull: false,
       },
       continente: {
-        type: DataTypes.ENUM("Asia", "Africa", "North America", "South America", "Europe", "Oceania"),
+        type: DataTypes.ENUM("Asia", "Africa", "North America", "South America", "Europe", "Oceania", "Antartica"),
         allowNull: false,
       },
       capital: {

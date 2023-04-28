@@ -1,8 +1,13 @@
-const  createActivity  = require("../controllers/activityController");
+const  {createActivity, getActivities}  = require("../controllers/activityController");
 
-const getActivitiesCountriesHandler = (req, res) => {
+const getActivitiesCountriesHandler = async (req, res) => {
 
-    res.status(200).send("Estas son las actividades")
+    try {
+        const actividad = await getActivities();
+        res.status(200).json({ actividad });
+      } catch (error) {
+        res.status(400).json({ error: error.message });
+      }
 }
 
 const createActivityHandler = async (req, res) => {
