@@ -8,8 +8,13 @@ const getCountryByNameHandler = async(req, res) => {
     res.status(200).json({data: getAllFilter})
 }
 const getAllCountriesHandler = async (req, res) => {
-    const getCountries = await getAllCountries()
-    res.status(200).json({data: getCountries});
+    try {
+        const getCountries = await getAllCountries()
+        res.status(200).json(getCountries);
+
+    } catch (error) {
+        res.status(400).json({descripcion: "Hubo un error en el controllador en la funcion getAllCountriesHandler", error: error.message})
+    }
 }
 const getCountryByIdHandler = async (req, res) => {
     const {id} = req.params;

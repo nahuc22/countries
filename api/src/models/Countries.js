@@ -4,14 +4,14 @@ const { DataTypes } = require('sequelize');
 module.exports = (sequelize) => {
   // defino el modelo
   sequelize.define(
-    "Countries",
+    "countries",
     {
       id: {
           type: DataTypes.STRING(3),
           primaryKey: true,
           defaultValue: DataTypes.UUIDV4
       },
-      name: {
+      nombre: {
         type: DataTypes.STRING,
         allowNull: false,
       },
@@ -20,7 +20,7 @@ module.exports = (sequelize) => {
         allowNull: false,
       },
       continente: {
-        type: DataTypes.ENUM("Asia", "Africa", "North America", "South America", "Europe", "Oceania", "Antartica"),
+        type: DataTypes.STRING,
         allowNull: false,
       },
       capital: {
