@@ -31,7 +31,7 @@ if (!countries) throw new Error("Debe enviar algun pais");
 
   await newActivity.addCountries(countriesFind.filter((country) => !!country));
 
-  return;
+  return newActivity;
 };
 
 const getActivities = async () => {
