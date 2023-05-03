@@ -13,11 +13,9 @@ const addActivity = async ({nombre,
   ) => {
 if (!countries) throw new Error("Debe enviar algun pais");
   const arrayCountries = Array.isArray(countries) ? countries : [countries];
-  //* Uso el metodo Promise.All para consultar en la DB si existen paises con los ID enviados
   const countriesFind = await Promise.all(
     arrayCountries.map((id) => Countries.findByPk(id.toUpperCase()))
   );
-  //* Valido si no se encontro ningun pais en la DB
   if (countriesFind.includes(undefined)) {
     throw new Error("No se encontraron países válidos");
   }
