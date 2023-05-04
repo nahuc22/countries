@@ -1,10 +1,5 @@
 const { Activities, Countries } = require("../db.js");
 
-const createActivity = async(data) => {
-    const response = await Activities.create(data);
-    return response.dataValues;
-} 
-
 const addActivity = async ({nombre,
   dificultad,
   duracion,
@@ -48,7 +43,6 @@ const getActivities = async () => {
   };
 
 module.exports = {
-    createActivity,
     getActivities,
     addActivity    
 }

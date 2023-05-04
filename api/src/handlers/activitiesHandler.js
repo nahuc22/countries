@@ -1,4 +1,4 @@
-const  {createActivity, getActivities, addActivity}  = require("../controllers/activityController");
+const  {getActivities, addActivity}  = require("../controllers/activityController");
 
 const getActivitiesCountriesHandler = async (req, res) => {
 
@@ -20,19 +20,7 @@ const postActivityHandler = async (req, res) => {
     }
   };
 
-const createActivityHandler = async (req, res) => {
-    
-    const data = req.body;
-    try
-    {
-    const newActivity = await createActivity(data);
-    res.status(201).json(newActivity)
-    } catch (error){
-        res.status(400).json({ error: error.message})
-    }
-}
 module.exports = {
     getActivitiesCountriesHandler,
-    createActivityHandler,
     postActivityHandler
 }   

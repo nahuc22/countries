@@ -1,6 +1,6 @@
 const axios = require("axios");
 const { Countries } = require("../db");
-const getAllCountries = async () => {
+const   getAllCountries = async () => {
   const temp =  await Countries.findAll()
   if(temp.length){
   return temp
