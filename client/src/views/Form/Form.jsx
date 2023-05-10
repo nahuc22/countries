@@ -1,5 +1,5 @@
 import { useState } from "react";
-
+import axios from "axios";
 const Form = () =>  {
    
 const [form, setForm] = useState({
@@ -7,7 +7,7 @@ const [form, setForm] = useState({
         dificultad:"",
         duracion:"",
         temporada:"",
-        paises: []
+        paisesId: ""
     });
 
 const [errors, setErrors] = useState({
@@ -15,7 +15,7 @@ const [errors, setErrors] = useState({
         dificultad:"",
         duracion:"",
         temporada:"",
-        paises: []
+        paisesId: "",
 })
 
 const validate = (form) => {
@@ -23,7 +23,6 @@ const validate = (form) => {
         console.log("Si pasa el regex --->", form.nombre);
         setErrors({...errors, nombre:""})
     } else {
-        console.log("No pasa una shit el regex");
         setErrors({...errors, nombre:"Hay un error en el email"})
     }
     if(form.nombre==="") setErrors({...errors,nombre:"Email vacío"})
@@ -32,42 +31,56 @@ const validate = (form) => {
 const onChangeHandler = (event) => {
     const property = event.target.name ;    
     const value = event.target.value;
-    console.log({[property]:value})
     setForm({...form,[property]: value})
     validate({...form, [property]:value});
 }
 
-const onSubmitHandler = () => {
-    
+const onSubmitHandler = (event) => {
+     event.preventDefault();
+     axios.post("http://localhost:3001/activities/send", form)
+     .then(res => alert(res))
+     .catch(error => alert(error))
+     
 }
     return (
-        <form>
+        <form onSubmit={onSubmitHandler}>
             <div>
                 <label>Nombre de la actividad: </label>
-                <input type="text" value={form.nombre} onChange={onChangeHandler} name="nombre"></input>
+                <input  type="text" value={form.nombre} onChange={onChangeHandler} name="nombre"></input>
                 {errors.nombre && <span>{errors.nombre}</span>}
                 
             </div>
 
             <div>
                 <label>Dificultad: </label>
-                <input type="number" min="1" max="5" multiple/>
+                <input type="number" min="1" max="5" onChange={onChangeHandler} value={form.dificultad} name="dificultad"/>
             </div>
 
             <div>
                 <label>Duracion: </label>
-                <input type="time" name="hora" step="3600"/>
+                <input type="number" min="0" max="24"  onChange={onChangeHandler} name="duracion"/>
             </div>
  
             <div>
-                <label>Temporada: </label>
-                <select name="enum">
-                    <option value="valor1">Opción 1</option>
-                    <option value="valor2">Opción 2</option>
-                    <option value="valor3">Opción 3</option>
-                </select>   
-            <button type="submit"></button>
-            </div>  
+                <label >Temporada: </label>
+                    <select name="temporada" value={form.temporada} onChange={onChangeHandler} >
+                        <option value="temporada" >Seleccione temporada</option>
+                        <option value="Verano">Verano</option>
+                        <option value="Otoño">Otoño</option>
+                        <option value="Invierno">Invierno</option>
+                        <option value="Primavera">Primavera</option>
+                    </select>  
+            <button type="submit">Submit</button>
+                </div> 
+                <div> 
+                <label>ID Pais</label>
+                <input
+            type="text"
+            value={form.paisesId}
+            onChange={onChangeHandler}
+            name="paisesId"
+            ></input>
+        </div>
         </form>
     )
 }

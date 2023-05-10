@@ -1,4 +1,4 @@
-const { Countries } = require("../db.js");
+const { Countries , Activities} = require("../db.js");
 const getAllCountries = require("./dbGetApi.js");
 
 
@@ -14,6 +14,7 @@ const getCountryById = async (id) => {
             "area",
             "capital",
           ],
+          include: Activities
     });
     return country;
 }
